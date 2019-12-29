@@ -1,0 +1,55 @@
+{% extends "sablon.html" %} {% block icerik %}
+<!-- Sayfa içeriği -->
+
+<h1>Halısaha Rezasvasyon</h1>
+<hr />
+
+<form class="form-inline" action="/ekle" method="POST">
+  <div class="form-group mb-2">
+    <input
+      type="text"
+      class="form-control-plaintext"
+      id="isim"
+      name="isim"
+      placeholder="Kimin adına?"
+      required
+    />
+  </div>
+  <div class="form-group mb-2">
+    <input
+      type="text"
+      class="form-control-plaintext"
+      id="durum"
+      name="durum"
+      placeholder="Hangi saatte?"
+      required
+    />
+  </div>
+
+  <button type="submit" class="btn btn-danger mb-2">Rezarvasyon Yap</button>
+</form>
+
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">İsim</th>
+      <th scope="col">Saat</th>
+      <th scope="col">Sil</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for yap in yapilacaklar %}
+    <tr>
+      <th scope="row">{{ yap.get('isim') }}</th>
+      <td>{{ yap.get('durum') }}</td>
+      <td>
+        <a href="/sil/{{ yap.get('_id') }}">
+          <i class="fa fa-fw fa-trash"></i>
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
